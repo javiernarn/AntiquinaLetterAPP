@@ -1,0 +1,122 @@
+.proposal {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px 60px;
+  text-align: center;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(217, 138, 148, 0.16), transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(201, 162, 39, 0.14), transparent 40%),
+    var(--parchment);
+}
+
+.proposal__hero,
+.proposal__stage,
+.proposal__celebrate,
+.proposal__letters {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 640px;
+}
+
+.proposal__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--wine);
+  margin: 0 0 18px;
+}
+
+.proposal__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 7vw, 3.6rem);
+  line-height: 1.15;
+  margin: 0 0 22px;
+  color: var(--wine-deep);
+}
+
+.proposal__title .script {
+  font-size: 1.1em;
+  color: var(--wine);
+}
+
+.proposal__body {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+  max-width: 460px;
+  margin: 0 auto 34px;
+  line-height: 1.6;
+}
+
+.proposal__begin {
+  border: none;
+  padding: 16px 40px;
+  border-radius: 999px;
+  background: linear-gradient(160deg, var(--wine-bright), var(--wine-deep));
+  color: var(--cream-text);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 14px 30px -12px rgba(122, 35, 49, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.proposal__begin:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 34px -12px rgba(122, 35, 49, 0.7);
+}
+
+.proposal__congrats-title {
+  font-size: clamp(2.6rem, 8vw, 4.2rem);
+  color: var(--wine);
+  margin: 0 0 18px;
+}
+
+.proposal__letters-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  color: var(--wine-deep);
+  margin: 0 0 10px;
+}
+
+.proposal__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 18px;
+  margin: 34px 0 30px;
+}
+
+.proposal__signature {
+  font-size: 1.6rem;
+  color: var(--wine);
+  margin-top: 20px;
+}
+
+.proposal__admin-link {
+  position: fixed;
+  bottom: 14px;
+  right: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--parchment-line);
+  text-decoration: none;
+  z-index: 2;
+  opacity: 0.6;
+}
+
+.proposal__admin-link:hover {
+  opacity: 1;
+  color: var(--ink-soft);
+}

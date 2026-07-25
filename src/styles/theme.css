@@ -1,0 +1,97 @@
+:root {
+  /* ── Palette ─────────────────────────────────────────────────────── */
+  --ink: #2b2620;
+  --ink-soft: #5a4f42;
+  --parchment: #f6eedd;
+  --parchment-deep: #ead9b4;
+  --parchment-line: #d8c49b;
+  --wine: #7a2331;
+  --wine-deep: #4f1420;
+  --wine-bright: #9c3348;
+  --gold: #c9a227;
+  --gold-soft: #d9b65c;
+  --rose: #d98a94;
+  --navy: #1b2440;
+  --navy-deep: #12182d;
+  --cream-text: #f3e7c9;
+
+  /* ── Type ────────────────────────────────────────────────────────── */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-script: "Parisienne", cursive;
+  --font-ui: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "Cutive Mono", monospace;
+
+  /* ── Layout ──────────────────────────────────────────────────────── */
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 26px;
+  --shadow-paper: 0 18px 40px -18px rgba(43, 38, 32, 0.45), 0 2px 6px rgba(43, 38, 32, 0.12);
+  --shadow-soft: 0 10px 30px -14px rgba(43, 38, 32, 0.3);
+  --ease-letter: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-ui);
+  color: var(--ink);
+  background: var(--parchment);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--gold-soft);
+  color: var(--wine-deep);
+}
+
+:focus-visible {
+  outline: 2px solid var(--wine-bright);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.script {
+  font-family: var(--font-script);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

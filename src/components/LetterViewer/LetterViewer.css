@@ -1,0 +1,64 @@
+.lviewer__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(27, 20, 14, 0.55);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 100;
+}
+
+.lviewer__paper {
+  position: relative;
+  width: min(560px, 100%);
+  max-height: 84vh;
+  overflow-y: auto;
+  background: var(--parchment);
+  background-image: linear-gradient(var(--parchment-line) 1px, transparent 1px);
+  background-size: 100% 32px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--parchment-line);
+  box-shadow: var(--shadow-paper);
+  padding: 46px 42px 40px;
+}
+
+.lviewer__close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: var(--parchment-deep);
+  color: var(--ink);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lviewer__stamp {
+  font-size: 1.8rem;
+  margin: 0 0 8px;
+}
+
+.lviewer__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--wine-deep);
+  margin: 0 0 20px;
+}
+
+.lviewer__body {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 32px;
+  color: var(--ink);
+}
+
+.lviewer__body p {
+  margin: 0;
+}
