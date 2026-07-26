@@ -4,13 +4,13 @@ import { useAuth } from "../../context/AuthContext.jsx";
 import "./Admin.css";
 
 export default function AdminLogin() {
-  const { user, loading, notAdminNotice, signInWithGoogle } = useAuth();
+  const { user, loading, notAdminNotice, authError, signingIn, signInWithGoogle } = useAuth();
 
   useEffect(() => {
     document.title = "Admin sign in — For Jessa Mae";
   }, []);
 
-  if (!loading && user) return <Navigate to="/admin" replace />;
+  if (!loading && user) return <Navigate to="/admin" replace state={{ from: "login" }} />;
 
   return (
     <div className="admin-auth">
@@ -21,9 +21,14 @@ export default function AdminLogin() {
           Only your Google account can reach this dashboard. Jessa's link never needs a sign-in — she
           just opens what you send her.
         </p>
-        <button type="button" className="admin-auth__google" onClick={signInWithGoogle}>
+        <button
+          type="button"
+          className="admin-auth__google"
+          onClick={signInWithGoogle}
+          disabled={signingIn}
+        >
           <GoogleMark />
-          Continue with Google
+          {signingIn ? "Signing in…" : "Continue with Google"}
         </button>
         {notAdminNotice && (
           <p className="admin-auth__error">
@@ -31,6 +36,7 @@ export default function AdminLogin() {
             <code> VITE_ADMIN_EMAILS</code> instead.
           </p>
         )}
+        {authError && !notAdminNotice && <p className="admin-auth__error">{authError}</p>}
       </div>
     </div>
   );

@@ -13,6 +13,13 @@ export default defineConfig({
         main: resolve(__dirname, "index.html"),
         admin: resolve(__dirname, "admin.html"),
       },
+      output: {
+        manualChunks: {
+          "vendor-firebase": ["firebase/app", "firebase/auth", "firebase/firestore"],
+          "vendor-motion": ["framer-motion"],
+          "vendor-react": ["react", "react-dom", "react-router-dom"],
+        },
+      },
     },
   },
 });

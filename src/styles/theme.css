@@ -1,5 +1,5 @@
 :root {
-  /* ── Palette ─────────────────────────────────────────────────────── */
+  /* ── Palette: paper (envelopes, letters, cards) ─────────────────── */
   --ink: #2b2620;
   --ink-soft: #5a4f42;
   --parchment: #f6eedd;
@@ -14,6 +14,21 @@
   --navy: #1b2440;
   --navy-deep: #12182d;
   --cream-text: #f3e7c9;
+
+  /* ── Palette: night sky (page background, chrome, glows) ────────── */
+  --night: #0d1330;
+  --night-deep: #070a18;
+  --night-glow-blue: rgba(87, 217, 255, 0.18);
+  --night-glow-violet: rgba(139, 123, 255, 0.16);
+  --neon-blue: #57d9ff;
+  --neon-blue-soft: #a9ecff;
+  --neon-blue-dim: #2f9fd1;
+  --neon-violet: #8b7bff;
+  --moon: #dce8ff;
+  --starlight: #f5f8ff;
+  --chocolate: #c98a52;
+  --shadow-neon: 0 0 22px rgba(87, 217, 255, 0.32), 0 0 54px rgba(87, 217, 255, 0.12);
+  --shadow-neon-soft: 0 0 16px rgba(87, 217, 255, 0.22);
 
   /* ── Type ────────────────────────────────────────────────────────── */
   --font-display: "Cormorant Garamond", Georgia, serif;
@@ -43,8 +58,12 @@ body,
 body {
   margin: 0;
   font-family: var(--font-ui);
-  color: var(--ink);
-  background: var(--parchment);
+  color: var(--moon);
+  background:
+    radial-gradient(circle at 12% 6%, var(--night-glow-violet), transparent 42%),
+    radial-gradient(circle at 88% 14%, var(--night-glow-blue), transparent 40%),
+    linear-gradient(180deg, var(--night) 0%, var(--night-deep) 75%);
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -67,7 +86,7 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid var(--wine-bright);
+  outline: 2px solid var(--neon-blue);
   outline-offset: 3px;
   border-radius: 4px;
 }

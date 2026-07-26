@@ -14,8 +14,32 @@ function formatTime(ts) {
 
 export default function ResponsesPanel() {
   const [responses, setResponses] = useState(null);
+  const [error, setError] = useState(null);
+  const [retryKey, setRetryKey] = useState(0);
 
-  useEffect(() => subscribeResponses(setResponses), []);
+  useEffect(() => {
+    setResponses(null);
+    setError(null);
+    return subscribeResponses(setResponses, setError);
+  }, [retryKey]);
+
+  if (error) {
+    return (
+      <div className="admin-empty">
+        <p style={{ margin: "0 0 12px" }}>
+          Couldn't load her visits{error.code ? ` (${error.code})` : ""}. This is usually a
+          permissions or connection hiccup, not missing data.
+        </p>
+        <button
+          type="button"
+          className="admin-btn admin-btn--sm"
+          onClick={() => setRetryKey((k) => k + 1)}
+        >
+          Try again
+        </button>
+      </div>
+    );
+  }
 
   if (responses === null) {
     return <p className="admin-hint">Loading her visits…</p>;

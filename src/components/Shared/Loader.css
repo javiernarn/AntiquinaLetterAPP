@@ -8,15 +8,16 @@
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--neon-blue-soft);
+  text-shadow: 0 0 10px rgba(87, 217, 255, 0.35);
 }
 
 .loader__mark {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  border: 2px solid var(--parchment-line);
-  border-top-color: var(--wine);
+  border: 2px solid rgba(220, 232, 255, 0.25);
+  border-top-color: var(--neon-blue);
   animation: spin 0.8s linear infinite;
 }
 

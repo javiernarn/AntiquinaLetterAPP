@@ -1,5 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  indexedDBLocalPersistence,
+  browserLocalPersistence,
+  setPersistence,
+} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -15,6 +21,20 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();
+// Always show the account picker instead of silently reusing whatever
+// Google session the phone's browser already has open.
+googleProvider.setCustomParameters({ prompt: "select_account" });
+
+// Explicit, most-durable-first persistence. Some mobile/in-app browsers
+// (private mode, storage-partitioned Safari, certain webviews) throw when
+// IndexedDB is touched — fall back gracefully instead of leaving auth in
+// an unpredictable state.
+setPersistence(auth, indexedDBLocalPersistence).catch(() => {
+  setPersistence(auth, browserLocalPersistence).catch(() => {
+    /* last resort: default in-memory persistence — sign-in still works
+       for the current tab even if it won't survive a restart */
+  });
+});
 
 // Everyone in this list can reach /admin. Everyone else who signs in
 // with Google gets signed back out immediately. Keep this in sync with

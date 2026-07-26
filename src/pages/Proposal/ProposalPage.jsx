@@ -6,6 +6,7 @@ import Envelope from "../../components/Envelope/Envelope.jsx";
 import LetterCard from "../../components/LetterCard/LetterCard.jsx";
 import LetterViewer from "../../components/LetterViewer/LetterViewer.jsx";
 import BackgroundFX from "../../components/Shared/BackgroundFX.jsx";
+import VintageDecor from "../../components/Shared/VintageDecor.jsx";
 import Loader from "../../components/Shared/Loader.jsx";
 import { celebrate } from "../../components/Confetti/celebrate.js";
 import { subscribeQuestions } from "../../services/questionsService.js";
@@ -80,6 +81,7 @@ export default function ProposalPage() {
   return (
     <div className="proposal">
       <BackgroundFX />
+      <VintageDecor />
 
       <AnimatePresence mode="wait">
         {stage === "intro" && (

@@ -1,0 +1,129 @@
+.vdecor {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.vdecor__notes,
+.vdecor__stickers {
+  position: absolute;
+  inset: 0;
+}
+
+/* ── Sticky notes: torn kraft-paper squares with a strip of tape ──── */
+.vdecor__note {
+  position: absolute;
+  width: 108px;
+  padding: 14px 12px 12px;
+  background: var(--parchment);
+  color: var(--ink);
+  border-radius: 3px;
+  box-shadow: var(--shadow-soft), 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+  transform: rotate(var(--rotate));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: vdecor-sway 7s ease-in-out infinite;
+  animation-delay: inherit;
+}
+
+.vdecor__note::before {
+  /* faint deckle-edge / paper-grain vignette so it doesn't read as a flat swatch */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  background: radial-gradient(circle at 30% 20%, rgba(43, 38, 32, 0.05), transparent 60%);
+  pointer-events: none;
+}
+
+.vdecor__tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 46px;
+  height: 20px;
+  transform: translateX(-50%) rotate(-2deg);
+  background: rgba(217, 182, 92, 0.55);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  box-shadow: 0 2px 4px rgba(43, 38, 32, 0.18);
+}
+
+.vdecor__note-line {
+  font-size: 1.15rem;
+  line-height: 1.25;
+  color: var(--wine-deep);
+  white-space: pre-line;
+}
+
+@keyframes vdecor-sway {
+  0%, 100% { transform: rotate(var(--rotate)); }
+  50%      { transform: rotate(calc(var(--rotate) * -0.4)) translateY(-4px); }
+}
+
+/* ── Stickers: scalloped vintage stamp badges ─────────────────────── */
+.vdecor__sticker {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(var(--rotate));
+  background:
+    radial-gradient(circle, var(--parchment-deep) 62%, transparent 63%),
+    repeating-conic-gradient(var(--gold-soft) 0deg 8deg, var(--parchment-deep) 8deg 16deg);
+  box-shadow: var(--shadow-soft);
+  animation: vdecor-bob 6s ease-in-out infinite;
+}
+
+.vdecor__sticker-glyph {
+  font-size: 1.5rem;
+  color: var(--wine);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+@keyframes vdecor-bob {
+  0%, 100% { transform: rotate(var(--rotate)) translateY(0); }
+  50%      { transform: rotate(var(--rotate)) translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vdecor__note,
+  .vdecor__sticker {
+    animation: none !important;
+  }
+}
+
+/* Keep things tidy on small screens: fewer, smaller, tucked to the edges. */
+@media (max-width: 700px) {
+  .vdecor__note {
+    width: 84px;
+    padding: 10px 8px 9px;
+  }
+  .vdecor__note-line {
+    font-size: 0.95rem;
+  }
+  .vdecor__sticker {
+    width: 44px;
+    height: 44px;
+  }
+  .vdecor__sticker-glyph {
+    font-size: 1.15rem;
+  }
+  /* Hide the lowest-priority piece from each group so nothing crowds the letter card */
+  .vdecor__notes .vdecor__note:nth-of-type(4),
+  .vdecor__stickers .vdecor__sticker:nth-of-type(4) {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .vdecor__notes .vdecor__note:nth-of-type(3),
+  .vdecor__stickers .vdecor__sticker:nth-of-type(3) {
+    display: none;
+  }
+}

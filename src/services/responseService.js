@@ -54,10 +54,19 @@ export async function recordLetterOpened(responseId, letterId) {
   });
 }
 
-/** Admin-only: live feed of every visit + her answers, newest first. */
-export function subscribeResponses(callback) {
+/**
+ * Admin-only: live feed of every visit + her answers, newest first.
+ * `onError` is required — without it a permissions error or a missing
+ * index fails silently and the panel is stuck on "Loading…" forever.
+ */
+export function subscribeResponses(onData, onError) {
   const q = query(responsesRef, orderBy("startedAt", "desc"));
-  return onSnapshot(q, (snap) => {
-    callback(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
-  });
+  return onSnapshot(
+    q,
+    (snap) => onData(snap.docs.map((d) => ({ id: d.id, ...d.data() }))),
+    (err) => {
+      console.error("subscribeResponses failed:", err);
+      onError?.(err);
+    }
+  );
 }

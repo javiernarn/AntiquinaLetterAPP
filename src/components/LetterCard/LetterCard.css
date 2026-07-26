@@ -5,7 +5,7 @@
   border-radius: var(--radius-sm);
   border: 1px solid var(--parchment-line);
   background: var(--parchment);
-  box-shadow: var(--shadow-soft);
+  box-shadow: var(--shadow-soft), 0 0 0 rgba(87, 217, 255, 0);
   cursor: pointer;
   overflow: hidden;
   display: flex;
@@ -19,7 +19,7 @@
 
 .letter-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 28px -14px rgba(43, 38, 32, 0.4);
+  box-shadow: 0 16px 28px -14px rgba(43, 38, 32, 0.4), 0 0 34px -8px rgba(87, 217, 255, 0.45);
 }
 
 .letter-card__flap {
