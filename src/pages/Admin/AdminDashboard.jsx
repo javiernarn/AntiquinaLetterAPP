@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../context/AuthContext.jsx";
 import LettersManager from "./LettersManager.jsx";
 import QuestionsManager from "./QuestionsManager.jsx";
@@ -18,6 +18,8 @@ export default function AdminDashboard() {
   const [tab, setTab] = useState("letters");
   const [scrolled, setScrolled] = useState(false);
   const [copied, setCopied] = useState(false);
+  const stickyRef = useRef(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
 
   useEffect(() => {
     document.title = "Dashboard — For Jessa Mae";
@@ -30,6 +32,23 @@ export default function AdminDashboard() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // The header is `position: fixed` (see Admin.css) so it never moves or
+  // hides on scroll, even during mobile browser-chrome resize. Since its
+  // height is dynamic (wraps on small screens, share row, etc.), measure
+  // it and push the panel below down by exactly that much so nothing
+  // slides underneath it.
+  useEffect(() => {
+    const el = stickyRef.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver((entries) => {
+      const h = entries[0]?.contentRect?.height ?? el.offsetHeight;
+      setHeaderHeight(h);
+    });
+    ro.observe(el);
+    setHeaderHeight(el.offsetHeight);
+    return () => ro.disconnect();
+  }, []);
+
   const shareUrl = typeof window !== "undefined" ? window.location.origin + "/" : "/";
 
   function copyShareUrl() {
@@ -40,9 +59,10 @@ export default function AdminDashboard() {
 
   return (
     <div className="admin">
-      {/* Sticks to the top of the viewport as the panel below scrolls —
-          header, share link, and tabs stay put together, like the OTA app. */}
-      <div className={`admin__stickytop${scrolled ? " is-scrolled" : ""}`}>
+      {/* Fixed to the top of the viewport, always — header, share link, and
+          tabs stay locked in place while the panel below scrolls underneath
+          them, with no jump/jitter from mobile browser-chrome resizing. */}
+      <div ref={stickyRef} className={`admin__stickytop${scrolled ? " is-scrolled" : ""}`}>
         <header className="admin__header">
           <div className="admin__who">
             <p className="admin__eyebrow">Signed in as</p>
@@ -82,7 +102,7 @@ export default function AdminDashboard() {
         </nav>
       </div>
 
-      <main className="admin__panel">
+      <main className="admin__panel" style={{ paddingTop: headerHeight ? headerHeight + 30 : undefined }}>
         {tab === "letters" && <LettersManager />}
         {tab === "questions" && <QuestionsManager />}
         {tab === "responses" && <ResponsesPanel />}

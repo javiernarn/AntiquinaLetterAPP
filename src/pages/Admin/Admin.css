@@ -81,8 +81,10 @@
 
 /* ── Dashboard shell ─────────────────────────────────────────────── */
 .admin__stickytop {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 60;
   background: var(--navy-deep);
   border-bottom: 1px solid transparent;
