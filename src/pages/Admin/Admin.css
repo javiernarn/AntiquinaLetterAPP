@@ -91,7 +91,7 @@
 
 .admin__stickytop.is-scrolled {
   border-bottom-color: rgba(201, 162, 39, 0.22);
-  box-shadow: 0 10px 24px -14px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 10px 24px -14px rgba(43, 38, 32, 0.4);
 }
 
 .admin__header {

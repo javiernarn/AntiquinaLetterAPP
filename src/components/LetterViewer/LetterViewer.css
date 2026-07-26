@@ -1,7 +1,7 @@
 .lviewer__backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(4, 6, 14, 0.72);
+  background: rgba(30, 22, 14, 0.68);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -20,7 +20,7 @@
   background-size: 100% 32px;
   border-radius: var(--radius-md);
   border: 1px solid var(--parchment-line);
-  box-shadow: var(--shadow-paper), 0 0 60px -8px rgba(87, 217, 255, 0.35);
+  box-shadow: var(--shadow-paper), 0 0 60px -8px rgba(184, 122, 42, 0.35);
   padding: 46px 42px 40px;
 }
 

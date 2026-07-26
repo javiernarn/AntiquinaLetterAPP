@@ -21,7 +21,7 @@
   position: absolute;
   inset: -34px;
   z-index: -1;
-  background: radial-gradient(circle, rgba(87, 217, 255, 0.22), transparent 68%);
+  background: radial-gradient(circle, rgba(184, 122, 42, 0.22), transparent 68%);
   filter: blur(6px);
   pointer-events: none;
 }
@@ -32,7 +32,7 @@
   height: 100%;
   background: linear-gradient(155deg, #efe1c3, #e3d1a4);
   border-radius: 8px;
-  box-shadow: var(--shadow-paper), 0 0 40px -6px rgba(87, 217, 255, 0.25);
+  box-shadow: var(--shadow-paper), 0 0 40px -6px rgba(184, 122, 42, 0.25);
   overflow: visible;
 }
 
@@ -105,7 +105,7 @@
   font-size: 1.5rem;
   color: var(--cream-text);
   z-index: 4;
-  box-shadow: 0 6px 14px -4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 6px 14px -4px rgba(43, 38, 32, 0.45);
 }
 
 .envelope-hint {
@@ -113,7 +113,7 @@
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   color: var(--neon-blue-soft);
-  text-shadow: 0 0 10px rgba(87, 217, 255, 0.4);
+  text-shadow: 0 0 10px rgba(184, 122, 42, 0.4);
   text-transform: uppercase;
   animation: pulse 2.4s ease-in-out infinite;
 }

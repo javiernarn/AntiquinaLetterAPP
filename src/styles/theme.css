@@ -15,20 +15,26 @@
   --navy-deep: #12182d;
   --cream-text: #f3e7c9;
 
-  /* ── Palette: night sky (page background, chrome, glows) ────────── */
-  --night: #0d1330;
-  --night-deep: #070a18;
-  --night-glow-blue: rgba(87, 217, 255, 0.18);
-  --night-glow-violet: rgba(139, 123, 255, 0.16);
-  --neon-blue: #57d9ff;
-  --neon-blue-soft: #a9ecff;
-  --neon-blue-dim: #2f9fd1;
-  --neon-violet: #8b7bff;
-  --moon: #dce8ff;
-  --starlight: #f5f8ff;
+  /* ── Palette: vintage envelope (page background, chrome, glows) ───
+     Warm kraft-paper, candlelight and dried-flower tones instead of a
+     night sky. Variable names are kept as-is so every component that
+     already references them (glows, borders, text) inherits the new
+     vintage look automatically. ─────────────────────────────────── */
+  --night: #f1e4c6;
+  --night-deep: #dfc99a;
+  --night-glow-blue: rgba(184, 122, 42, 0.16);
+  --night-glow-violet: rgba(154, 74, 92, 0.12);
+  --neon-blue: #a8672a;
+  --neon-blue-soft: #8a5a28;
+  --neon-blue-dim: #6b4620;
+  --neon-violet: #8a4a5c;
+  --moon: #3a2f22;
+  --starlight: #fff8e8;
   --chocolate: #c98a52;
-  --shadow-neon: 0 0 22px rgba(87, 217, 255, 0.32), 0 0 54px rgba(87, 217, 255, 0.12);
-  --shadow-neon-soft: 0 0 16px rgba(87, 217, 255, 0.22);
+  --shadow-neon: 0 0 22px rgba(184, 122, 42, 0.28), 0 0 48px rgba(184, 122, 42, 0.1);
+  --shadow-neon-soft: 0 0 16px rgba(184, 122, 42, 0.2);
+  --sage: #8a9471;
+  --dusk-plum: #6d4a5c;
 
   /* ── Type ────────────────────────────────────────────────────────── */
   --font-display: "Cormorant Garamond", Georgia, serif;
@@ -60,11 +66,27 @@ body {
   font-family: var(--font-ui);
   color: var(--moon);
   background:
-    radial-gradient(circle at 12% 6%, var(--night-glow-violet), transparent 42%),
-    radial-gradient(circle at 88% 14%, var(--night-glow-blue), transparent 40%),
-    linear-gradient(180deg, var(--night) 0%, var(--night-deep) 75%);
+    radial-gradient(circle at 12% 6%, var(--night-glow-violet), transparent 46%),
+    radial-gradient(circle at 88% 14%, var(--night-glow-blue), transparent 44%),
+    radial-gradient(circle at 50% 100%, rgba(154, 74, 92, 0.08), transparent 55%),
+    linear-gradient(165deg, var(--night) 0%, var(--night-deep) 100%);
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle laid-paper grain over the whole page, like light through an
+   old envelope — kept faint so it never competes with content. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(90, 74, 58, 0.035) 0px, transparent 1px, transparent 3px),
+    repeating-linear-gradient(0deg, rgba(90, 74, 58, 0.03) 0px, transparent 1px, transparent 3px);
 }
 
 img {

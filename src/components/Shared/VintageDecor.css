@@ -58,6 +58,28 @@
   white-space: pre-line;
 }
 
+/* ── Sticky-note color variants, so the notes read like a real mixed
+   stack of scrapbook paper rather than one repeated swatch ─────────── */
+.vdecor__note--kraft {
+  background: #e8d4a8;
+}
+
+.vdecor__note--rose {
+  background: #f0d9d3;
+}
+
+.vdecor__note--rose .vdecor__note-line {
+  color: var(--dusk-plum);
+}
+
+.vdecor__note--sage {
+  background: #dfe2c9;
+}
+
+.vdecor__note--sage .vdecor__note-line {
+  color: #4c5a3a;
+}
+
 @keyframes vdecor-sway {
   0%, 100% { transform: rotate(var(--rotate)); }
   50%      { transform: rotate(calc(var(--rotate) * -0.4)) translateY(-4px); }
@@ -114,16 +136,16 @@
   .vdecor__sticker-glyph {
     font-size: 1.15rem;
   }
-  /* Hide the lowest-priority piece from each group so nothing crowds the letter card */
+  /* Hide the lowest-priority pieces from each group so nothing crowds the letter card */
   .vdecor__notes .vdecor__note:nth-of-type(4),
-  .vdecor__stickers .vdecor__sticker:nth-of-type(4) {
+  .vdecor__stickers .vdecor__sticker:nth-of-type(n + 5) {
     display: none;
   }
 }
 
 @media (max-width: 480px) {
   .vdecor__notes .vdecor__note:nth-of-type(3),
-  .vdecor__stickers .vdecor__sticker:nth-of-type(3) {
+  .vdecor__stickers .vdecor__sticker:nth-of-type(n + 4) {
     display: none;
   }
 }

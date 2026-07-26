@@ -9,14 +9,14 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--neon-blue-soft);
-  text-shadow: 0 0 10px rgba(87, 217, 255, 0.35);
+  text-shadow: 0 0 10px rgba(184, 122, 42, 0.35);
 }
 
 .loader__mark {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  border: 2px solid rgba(220, 232, 255, 0.25);
+  border: 2px solid rgba(92, 74, 56, 0.25);
   border-top-color: var(--neon-blue);
   animation: spin 0.8s linear infinite;
 }

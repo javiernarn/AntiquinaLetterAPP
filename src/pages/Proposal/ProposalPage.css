@@ -9,22 +9,22 @@
   text-align: center;
 }
 
-/* Glass panels for the stages that sit directly on the night sky —
-   they need a lit surface behind the text to stay legible and to give
-   the neon glow something to catch on. */
+/* Parchment-glass panels for the stages that sit on the vintage envelope
+   backdrop — a lit, paper-toned surface that keeps text legible and
+   gives the warm candlelight glow something to catch on. */
 .proposal__hero,
 .proposal__celebrate {
   position: relative;
   z-index: 1;
   width: 100%;
   max-width: 620px;
-  background: linear-gradient(165deg, rgba(27, 36, 64, 0.6), rgba(7, 10, 24, 0.68));
-  border: 1px solid rgba(87, 217, 255, 0.18);
+  background: linear-gradient(165deg, rgba(255, 250, 236, 0.72), rgba(246, 238, 221, 0.6));
+  border: 1px solid rgba(184, 122, 42, 0.22);
   border-radius: var(--radius-lg);
   padding: 52px 44px;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  box-shadow: var(--shadow-neon), 0 34px 64px -30px rgba(0, 0, 0, 0.65);
+  box-shadow: var(--shadow-neon), 0 34px 64px -30px rgba(43, 38, 32, 0.28);
 }
 
 .proposal__stage,
@@ -41,7 +41,7 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--neon-blue-soft);
-  text-shadow: 0 0 12px rgba(87, 217, 255, 0.5);
+  text-shadow: 0 1px 0 rgba(255, 250, 236, 0.6);
   margin: 0 0 18px;
 }
 
@@ -57,14 +57,14 @@
 .proposal__title .script {
   font-size: 1.1em;
   color: var(--neon-blue);
-  text-shadow: 0 0 18px rgba(87, 217, 255, 0.55);
+  text-shadow: 0 1px 2px rgba(184, 122, 42, 0.25);
 }
 
 .proposal__body {
   font-family: var(--font-display);
   font-style: italic;
   font-size: 1.2rem;
-  color: rgba(220, 232, 255, 0.78);
+  color: rgba(92, 74, 56, 0.78);
   max-width: 460px;
   margin: 0 auto 34px;
   line-height: 1.6;
@@ -86,13 +86,13 @@
 
 .proposal__begin:hover {
   transform: translateY(-2px);
-  box-shadow: 0 18px 34px -12px rgba(122, 35, 49, 0.7), 0 0 26px rgba(87, 217, 255, 0.28);
+  box-shadow: 0 18px 34px -12px rgba(122, 35, 49, 0.7), 0 0 26px rgba(184, 122, 42, 0.28);
 }
 
 .proposal__congrats-title {
   font-size: clamp(2.6rem, 8vw, 4.2rem);
   color: var(--neon-blue-soft);
-  text-shadow: 0 0 22px rgba(87, 217, 255, 0.42);
+  text-shadow: 0 1px 2px rgba(184, 122, 42, 0.2);
   margin: 0 0 18px;
 }
 
@@ -114,7 +114,7 @@
 .proposal__signature {
   font-size: 1.6rem;
   color: var(--neon-blue-soft);
-  text-shadow: 0 0 14px rgba(87, 217, 255, 0.35);
+  text-shadow: 0 1px 0 rgba(255, 250, 236, 0.6);
   margin-top: 20px;
 }
 
@@ -126,7 +126,7 @@
   font-size: 0.68rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(220, 232, 255, 0.35);
+  color: rgba(92, 74, 56, 0.35);
   text-decoration: none;
   z-index: 2;
   opacity: 0.6;

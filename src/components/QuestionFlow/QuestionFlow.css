@@ -15,13 +15,13 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: rgba(220, 232, 255, 0.28);
+  background: rgba(92, 74, 56, 0.28);
   transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .qflow__dot--filled {
   background: var(--neon-blue);
-  box-shadow: 0 0 8px rgba(87, 217, 255, 0.7);
+  box-shadow: 0 0 8px rgba(184, 122, 42, 0.7);
   transform: scale(1.2);
 }
 
@@ -32,7 +32,7 @@
   background-size: 100% 34px;
   border-radius: var(--radius-md);
   border: 1px solid var(--parchment-line);
-  box-shadow: var(--shadow-paper), 0 0 46px -10px rgba(87, 217, 255, 0.3);
+  box-shadow: var(--shadow-paper), 0 0 46px -10px rgba(184, 122, 42, 0.3);
   padding: 44px 40px 36px;
   text-align: center;
   position: relative;

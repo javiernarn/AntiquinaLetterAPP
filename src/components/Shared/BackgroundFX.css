@@ -6,29 +6,29 @@
   z-index: 0;
 }
 
-/* ── Soft neon ambience, like moonlight leaking through a window ─── */
+/* ── Soft candlelight ambience, like warm light through a paper shade ── */
 .bgfx__orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(64px);
-  opacity: 0.55;
+  filter: blur(70px);
+  opacity: 0.5;
   animation: bgfx-drift 24s ease-in-out infinite;
 }
 
 .bgfx__orb--blue {
-  width: 360px;
-  height: 360px;
-  top: -100px;
-  left: -70px;
-  background: radial-gradient(circle, var(--neon-blue) 0%, transparent 70%);
+  width: 380px;
+  height: 380px;
+  top: -110px;
+  left: -80px;
+  background: radial-gradient(circle, var(--gold-soft) 0%, transparent 70%);
 }
 
 .bgfx__orb--violet {
-  width: 320px;
-  height: 320px;
-  bottom: -110px;
-  right: -80px;
-  background: radial-gradient(circle, var(--neon-violet) 0%, transparent 70%);
+  width: 340px;
+  height: 340px;
+  bottom: -120px;
+  right: -90px;
+  background: radial-gradient(circle, var(--rose) 0%, transparent 70%);
   animation-duration: 28s;
   animation-delay: -6s;
 }
@@ -38,36 +38,43 @@
   50% { transform: translate(30px, -22px) scale(1.08); }
 }
 
-/* ── Twinkling starfield ─────────────────────────────────────────── */
-.bgfx__stars {
+/* ── Aged-photograph vignette, deepens the paper tone at the edges ── */
+.bgfx__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(58, 42, 26, 0.16) 100%);
+}
+
+/* ── Drifting sunlit dust / paper flecks ───────────────────────────── */
+.bgfx__dust {
   position: absolute;
   inset: 0;
 }
 
-.bgfx__star {
+.bgfx__mote {
   position: absolute;
-  width: 2px;
-  height: 2px;
+  width: 3px;
+  height: 3px;
   border-radius: 50%;
-  background: var(--starlight);
-  box-shadow: 0 0 4px 1px rgba(245, 248, 255, 0.55);
+  background: var(--gold-soft);
+  box-shadow: 0 0 4px 1px rgba(201, 162, 39, 0.4);
   animation-name: bgfx-twinkle;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
 
 @keyframes bgfx-twinkle {
-  0%, 100% { opacity: 0.12; transform: scale(0.75); }
-  50% { opacity: 1; transform: scale(1.35); }
+  0%, 100% { opacity: 0.15; transform: scale(0.7); }
+  50% { opacity: 0.65; transform: scale(1.25); }
 }
 
-/* ── Drifting vintage motifs: butterflies, flowers, books, hearts,
-   chocolate — rising slowly like they're caught in a night breeze ─── */
+/* ── Drifting vintage motifs: butterflies, flowers, books, letters,
+   stamps — rising slowly like keepsakes caught in a warm breeze ──── */
 .bgfx__item {
   position: absolute;
   bottom: -10%;
-  opacity: 0.4;
-  filter: drop-shadow(0 0 6px currentColor);
+  opacity: 0.5;
+  filter: drop-shadow(0 1px 2px rgba(58, 42, 26, 0.25));
   animation-name: bgfx-float;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
@@ -79,13 +86,13 @@
     opacity: 0;
   }
   10% {
-    opacity: 0.42;
+    opacity: 0.55;
   }
   50% {
     transform: translateY(-58vh) translateX(16px) rotate(-8deg);
   }
   90% {
-    opacity: 0.28;
+    opacity: 0.35;
   }
   100% {
     transform: translateY(-116vh) translateX(-12px) rotate(10deg);
