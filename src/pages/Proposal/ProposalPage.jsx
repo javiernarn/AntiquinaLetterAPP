@@ -35,8 +35,14 @@ export default function ProposalPage() {
   const [openedIds, setOpenedIds] = useState([]);
 
   useEffect(() => {
-    const unsubQ = subscribeQuestions((q) => setQuestions(q.length ? q : DEFAULT_QUESTIONS));
-    const unsubL = subscribeLetters((l) => setLetters(l.length ? l : DEFAULT_LETTERS));
+    const unsubQ = subscribeQuestions((q) => {
+      const active = q.filter((item) => item.active !== false);
+      setQuestions(active.length ? active : DEFAULT_QUESTIONS);
+    });
+    const unsubL = subscribeLetters((l) => {
+      const active = l.filter((item) => item.active !== false);
+      setLetters(active.length ? active : DEFAULT_LETTERS);
+    });
     const unsubS = subscribeSettings(setSettings);
     startResponse().then(setResponseId).catch(() => setResponseId(null));
     return () => {

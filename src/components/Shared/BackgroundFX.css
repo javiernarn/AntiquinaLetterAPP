@@ -105,3 +105,31 @@
     display: none;
   }
 }
+
+/* On small phones, dial back the ambience so it stays a backdrop
+   rather than competing with the letter/question card for attention. */
+@media (max-width: 480px) {
+  .bgfx__orb {
+    filter: blur(46px);
+    opacity: 0.38;
+  }
+
+  .bgfx__orb--blue {
+    width: 220px;
+    height: 220px;
+  }
+
+  .bgfx__orb--violet {
+    width: 200px;
+    height: 200px;
+  }
+
+  .bgfx__item {
+    opacity: 0.36;
+  }
+
+  /* thin out the drifting cast so only every other motif shows */
+  .bgfx__motifs .bgfx__item:nth-child(even) {
+    display: none;
+  }
+}

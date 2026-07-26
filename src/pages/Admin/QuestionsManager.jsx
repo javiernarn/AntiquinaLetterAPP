@@ -13,6 +13,7 @@ export default function QuestionsManager() {
   const [form, setForm] = useState(EMPTY);
   const [editingId, setEditingId] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => subscribeQuestions(setQuestions), []);
 
@@ -38,6 +39,7 @@ export default function QuestionsManager() {
     e.preventDefault();
     if (!form.text.trim()) return;
     setSaving(true);
+    setError("");
     try {
       if (editingId) {
         await updateQuestion(editingId, form);
@@ -45,6 +47,13 @@ export default function QuestionsManager() {
         await createQuestion(form, Date.now());
       }
       resetForm();
+    } catch (err) {
+      console.error("Saving question failed:", err);
+      setError(
+        err?.code === "permission-denied"
+          ? "Firestore rejected this save (permission-denied). Your Firestore security rules likely haven't been deployed, or aren't allowing your admin account to write — check the Rules tab in the Firebase console."
+          : `Couldn't save this question: ${err?.message || "unknown error"}`
+      );
     } finally {
       setSaving(false);
     }
@@ -52,8 +61,14 @@ export default function QuestionsManager() {
 
   async function handleDelete(id) {
     if (!window.confirm("Remove this question from the flow?")) return;
-    await deleteQuestion(id);
-    if (editingId === id) resetForm();
+    setError("");
+    try {
+      await deleteQuestion(id);
+      if (editingId === id) resetForm();
+    } catch (err) {
+      console.error("Deleting question failed:", err);
+      setError(`Couldn't delete this question: ${err?.message || "unknown error"}`);
+    }
   }
 
   return (
@@ -98,6 +113,18 @@ export default function QuestionsManager() {
               />
             </label>
           </div>
+          <label className="admin-form__checkbox">
+            <input
+              type="checkbox"
+              checked={form.active ?? true}
+              onChange={(e) => setForm({ ...form, active: e.target.checked })}
+            />
+            Active
+            <span className={`admin-form__status ${form.active ?? true ? "is-active" : "is-inactive"}`}>
+              {(form.active ?? true) ? "● visible in her flow" : "● hidden from her flow"}
+            </span>
+          </label>
+          {error && <p className="admin-form__error">{error}</p>}
           <div className="admin-form__actions">
             <button type="submit" className="admin-btn admin-btn--primary" disabled={saving}>
               {editingId ? "Save changes" : "Add question"}
@@ -117,7 +144,10 @@ export default function QuestionsManager() {
           {sorted.map((q, i) => (
             <li key={q.id} className="admin-list__item">
               <div>
-                <p className="admin-list__title">{i + 1}. {q.text}</p>
+                <p className="admin-list__title">
+                  {i + 1}. {q.text}
+                  {q.active === false && <span className="admin-list__badge">inactive</span>}
+                </p>
                 <p className="admin-list__meta">Yes: "{q.yesLabel}" · No: "{q.noLabel}"</p>
               </div>
               <div className="admin-list__actions">

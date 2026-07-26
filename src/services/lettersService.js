@@ -29,6 +29,7 @@ export async function createLetter(data, order) {
     envelopeColor: data.envelopeColor || "wine",
     stamp: data.stamp || "💌",
     order: order ?? Date.now(),
+    active: data.active ?? true,
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
   });

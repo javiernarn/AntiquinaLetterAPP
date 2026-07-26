@@ -5,15 +5,24 @@ export default function SettingsPanel() {
   const [form, setForm] = useState(DEFAULT_SETTINGS);
   const [saving, setSaving] = useState(false);
   const [savedAt, setSavedAt] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => subscribeSettings(setForm), []);
 
   async function handleSubmit(e) {
     e.preventDefault();
     setSaving(true);
+    setError("");
     try {
       await saveSettings(form);
       setSavedAt(Date.now());
+    } catch (err) {
+      console.error("Saving page copy failed:", err);
+      setError(
+        err?.code === "permission-denied"
+          ? "Firestore rejected this save (permission-denied). Your Firestore security rules likely haven't been deployed, or aren't allowing your admin account to write — check the Rules tab in the Firebase console."
+          : `Couldn't save: ${err?.message || "unknown error"}`
+      );
     } finally {
       setSaving(false);
     }
@@ -75,8 +84,9 @@ export default function SettingsPanel() {
           <button type="submit" className="admin-btn admin-btn--primary" disabled={saving}>
             Save copy
           </button>
-          {savedAt && <span className="admin-hint">Saved.</span>}
+          {savedAt && !error && <span className="admin-hint">Saved.</span>}
         </div>
+        {error && <p className="admin-form__error">{error}</p>}
       </form>
     </section>
   );

@@ -61,10 +61,11 @@
 .qflow__question {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  font-size: clamp(1.5rem, 6vw, 2.3rem);
   line-height: 1.25;
   margin: 0 0 12px;
   color: var(--wine-deep);
+  overflow-wrap: break-word;
 }
 
 .qflow__subtext {
@@ -103,11 +104,37 @@
   box-shadow: 0 14px 26px -10px rgba(122, 35, 49, 0.75);
 }
 
+@media (max-width: 600px) {
+  .qflow__card {
+    padding: 38px 26px 30px;
+  }
+  .qflow__card::before {
+    left: 30px;
+  }
+}
+
 @media (max-width: 480px) {
   .qflow__card {
     padding: 34px 22px 28px;
   }
   .qflow__actions {
     gap: 14px;
+  }
+  .qflow__subtext {
+    font-size: 0.95rem;
+    margin: 0 0 24px;
+  }
+}
+
+@media (max-width: 360px) {
+  .qflow__card {
+    padding: 28px 16px 24px;
+  }
+  .qflow__card::before {
+    left: 18px;
+  }
+  .qflow__yes {
+    min-width: 112px;
+    padding: 12px 22px;
   }
 }

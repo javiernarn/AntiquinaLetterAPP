@@ -79,20 +79,23 @@
 .envelope__label {
   position: absolute;
   bottom: 18%;
-  left: 0;
-  right: 0;
+  left: 8px;
+  right: 8px;
   text-align: center;
   z-index: 2;
-  font-size: 1.4rem;
+  font-size: clamp(1rem, 5vw, 1.4rem);
   color: var(--wine-deep);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .envelope__seal {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 58px;
-  height: 58px;
+  width: clamp(46px, 15vw, 58px);
+  height: clamp(46px, 15vw, 58px);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   background: radial-gradient(circle at 35% 30%, var(--wine-bright), var(--wine-deep));
@@ -102,7 +105,7 @@
   justify-content: center;
   font-family: Georgia, serif;
   font-style: italic;
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
   color: var(--cream-text);
   z-index: 4;
   box-shadow: 0 6px 14px -4px rgba(43, 38, 32, 0.45);
@@ -116,9 +119,18 @@
   text-shadow: 0 0 10px rgba(184, 122, 42, 0.4);
   text-transform: uppercase;
   animation: pulse 2.4s ease-in-out infinite;
+  text-align: center;
+  padding: 0 12px;
 }
 
 @keyframes pulse {
   0%, 100% { opacity: 0.55; }
   50% { opacity: 1; }
+}
+
+@media (max-width: 360px) {
+  .envelope {
+    width: min(300px, 84vw);
+    height: min(204px, 57vw);
+  }
 }

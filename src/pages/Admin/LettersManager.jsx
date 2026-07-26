@@ -6,7 +6,7 @@ import {
   deleteLetter,
 } from "../../services/lettersService.js";
 
-const EMPTY = { title: "", body: "", category: "For her", envelopeColor: "wine", stamp: "💌" };
+const EMPTY = { title: "", body: "", category: "For her", envelopeColor: "wine", stamp: "💌", active: true };
 const COLORS = ["wine", "gold", "rose", "navy"];
 
 export default function LettersManager() {
@@ -14,6 +14,7 @@ export default function LettersManager() {
   const [form, setForm] = useState(EMPTY);
   const [editingId, setEditingId] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => subscribeLetters(setLetters), []);
 
@@ -27,6 +28,7 @@ export default function LettersManager() {
       category: letter.category || "For her",
       envelopeColor: letter.envelopeColor || "wine",
       stamp: letter.stamp || "💌",
+      active: letter.active ?? true,
     });
   }
 
@@ -39,6 +41,7 @@ export default function LettersManager() {
     e.preventDefault();
     if (!form.title.trim() || !form.body.trim()) return;
     setSaving(true);
+    setError("");
     try {
       if (editingId) {
         await updateLetter(editingId, form);
@@ -46,6 +49,13 @@ export default function LettersManager() {
         await createLetter(form, Date.now());
       }
       resetForm();
+    } catch (err) {
+      console.error("Saving letter failed:", err);
+      setError(
+        err?.code === "permission-denied"
+          ? "Firestore rejected this save (permission-denied). Your Firestore security rules likely haven't been deployed, or aren't allowing your admin account to write — check the Rules tab in the Firebase console."
+          : `Couldn't save this letter: ${err?.message || "unknown error"}`
+      );
     } finally {
       setSaving(false);
     }
@@ -53,8 +63,14 @@ export default function LettersManager() {
 
   async function handleDelete(id) {
     if (!window.confirm("Delete this letter for good?")) return;
-    await deleteLetter(id);
-    if (editingId === id) resetForm();
+    setError("");
+    try {
+      await deleteLetter(id);
+      if (editingId === id) resetForm();
+    } catch (err) {
+      console.error("Deleting letter failed:", err);
+      setError(`Couldn't delete this letter: ${err?.message || "unknown error"}`);
+    }
   }
 
   return (
@@ -111,6 +127,18 @@ export default function LettersManager() {
               required
             />
           </label>
+          <label className="admin-form__checkbox">
+            <input
+              type="checkbox"
+              checked={form.active ?? true}
+              onChange={(e) => setForm({ ...form, active: e.target.checked })}
+            />
+            Active
+            <span className={`admin-form__status ${form.active ?? true ? "is-active" : "is-inactive"}`}>
+              {(form.active ?? true) ? "● visible on her page" : "● hidden from her page"}
+            </span>
+          </label>
+          {error && <p className="admin-form__error">{error}</p>}
           <div className="admin-form__actions">
             <button type="submit" className="admin-btn admin-btn--primary" disabled={saving}>
               {editingId ? "Save changes" : "Add letter"}
@@ -130,7 +158,10 @@ export default function LettersManager() {
           {sorted.map((letter) => (
             <li key={letter.id} className="admin-list__item">
               <div>
-                <p className="admin-list__title">{letter.stamp} {letter.title}</p>
+                <p className="admin-list__title">
+                  {letter.stamp} {letter.title}
+                  {letter.active === false && <span className="admin-list__badge">inactive</span>}
+                </p>
                 <p className="admin-list__meta">{letter.category} · {letter.envelopeColor}</p>
               </div>
               <div className="admin-list__actions">

@@ -47,9 +47,10 @@
 .lviewer__title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: clamp(1.4rem, 6vw, 1.8rem);
   color: var(--wine-deep);
   margin: 0 0 20px;
+  padding-right: 30px;
 }
 
 .lviewer__body {
@@ -57,8 +58,31 @@
   font-size: 1.15rem;
   line-height: 32px;
   color: var(--ink);
+  overflow-wrap: break-word;
 }
 
 .lviewer__body p {
   margin: 0;
+}
+
+@media (max-width: 600px) {
+  .lviewer__backdrop {
+    padding: 14px;
+  }
+
+  .lviewer__paper {
+    max-height: 88vh;
+    padding: 34px 22px 28px;
+  }
+
+  .lviewer__body {
+    font-size: 1.02rem;
+    line-height: 28px;
+  }
+}
+
+@media (max-width: 360px) {
+  .lviewer__paper {
+    padding: 28px 16px 24px;
+  }
 }
