@@ -66,7 +66,6 @@ export default function ProposalPage() {
     if (responseId) recordFinalDecision(responseId, "yes");
     setStage("celebrate");
     celebrate();
-    setTimeout(() => setStage("envelope"), 2600);
   }
 
   function handleLetterOpen(letter) {
@@ -138,6 +137,14 @@ export default function ProposalPage() {
           >
             <h1 className="proposal__congrats-title script">{settings.congratsTitle}</h1>
             <p className="proposal__body">{settings.congratsBody}</p>
+            <button
+              type="button"
+              className="proposal__begin"
+              style={{ marginTop: 28 }}
+              onClick={() => setStage("envelope")}
+            >
+              Continue
+            </button>
           </motion.section>
         )}
 
